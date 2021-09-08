@@ -8,23 +8,25 @@ namespace Banco
 {
     public class CorrienteDolares : Cuenta
     {
-        public void Extraccion(int monto, TipoDeExtraccion tipo)
+        public override void Extraccion(int monto, TipoDeExtraccion tipo)
         {
-            float insertado = Convert.ToInt32(Console.ReadLine());
-            if (tipo == TipoDeExtraccion.CajeroAutomatico)
+            switch (tipo)
             {
-                if (insertado > 200)
-                {
-                    Console.WriteLine("no se puede retirar mas de 200 por cajero automatico");
-                }
-                else
-                {
+                case TipoDeExtraccion.CajeroAutomatico:
+                    
+                        if (monto > 200)
+                        {
+                            Console.WriteLine("No se puede extraer mas de 200 dolares por cajero automatico, visite una caja");
+                        }
+                        else
+                        {
+                            this.Cantidad -= monto;
+                        }
+                    break;
+
+                case TipoDeExtraccion.CajeroHumano:
                     this.Cantidad -= monto;
-                }
-            }
-            else
-            {
-                this.Cantidad -= monto;
+                    break;
             }
         }
     }

@@ -16,15 +16,9 @@ namespace Banco
 
         public Cuenta() { }
 
-        public void Insercion(int monto)
-        {
-            cantidad += monto;
-        } 
+        public void Insercion(int monto){cantidad += monto;} 
 
-        public void Extraccion(int monto,TipoDeExtraccion tipo)
-        {
-
-        }
+        public virtual void Extraccion(int monto,TipoDeExtraccion tipo){}
 
     }
 

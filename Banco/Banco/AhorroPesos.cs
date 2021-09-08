@@ -8,24 +8,34 @@ namespace Banco
 {
     public class AhorroPesos : Cuenta
     {
-        public void Extraccion(int monto, TipoDeExtraccion tipo)
+        public override void Extraccion(int monto, TipoDeExtraccion tipo)
         {
-            float insertado = Convert.ToInt32(Console.ReadLine());
-            if (tipo == TipoDeExtraccion.CajeroAutomatico)
+            if (this.Cantidad < monto)
             {
-                if (insertado > 10000)
+                switch (tipo)
                 {
-                    Console.WriteLine("no se puede retirar mas de 10000 por cajero automatico");
-                }
-                else
-                {
-                    this.Cantidad -= monto;
+                    case TipoDeExtraccion.CajeroAutomatico:
+
+                        if (monto > 10000)
+                        {
+                            Console.WriteLine("No se puede extraer mas de 10k por cajero automatico, visite una caja");
+                        }
+                        else
+                        {
+                            this.Cantidad -= monto;
+                        }
+                        break;
+
+                    case TipoDeExtraccion.CajeroHumano:
+                        this.Cantidad -= monto;
+                        break;
                 }
             }
             else
             {
-                this.Cantidad -= monto;
+                Console.WriteLine("No se realizo la extraccion, fondos insuficientes");
             }
+            
         }
     }
 }
